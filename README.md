@@ -2,11 +2,7 @@
 
 ###
 
-<!-- GitHub Stats & Languages Side-by-Side -->
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=kizo-88&show_icons=true&include_all_commits=true&count_private=true&theme=dracula&locale=en" height="150" alt="stats graph" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=kizo-88&locale=en&layout=compact&langs_count=5&theme=dracula" height="150" alt="languages graph" />
-</div>
+
 
 ###
 

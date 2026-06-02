@@ -40,13 +40,12 @@
 
 ###
 
-<!-- Snake Game Animation -->
+
+<!-- Updated Snake Game Animation -->
 <h3 align="left">My Contribution Snake:</h3>
 <div align="left">
-  <img src="https://raw.githubusercontent.com/kizo-88/kizo-88/output/snake.svg" alt="Snake animation" width="100%" />
+  <img src="https://raw.githubusercontent.com/kizo-88/kizo-88/output/github-contribution-grid-snake.svg" alt="Snake animation" width="100%" />
 </div>
-
-###
 
 <!-- Featured Character GIF Center Stage -->
 <div align="center">

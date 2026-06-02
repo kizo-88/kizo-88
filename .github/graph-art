@@ -1,1 +1,54 @@
 
+const { execSync } = require('child_process');
+const fs = require('fs');
+
+// 7 rows (Sunday to Saturday) x 29 columns matrix representing "KAIZO"
+const matrix = [
+  "X   X   X   X  XXXXX  ZZZZZ  OOOOO ",
+  "X  X   X X    X      Z     O     O",
+  "X X   X   X   X     Z      O     O",
+  "XX    XXXXX   X    Z       O     O",
+  "X X   X   X   X   Z        O     O",
+  "X  X  X   X   X  Z         O     O",
+  "X   X X   X   X  ZZZZZ     OOOOO "
+];
+
+// Find a starting point roughly 30 weeks ago so it centers nicely in your history
+const startDate = new Date();
+startDate.setDate(startDate.getDate() - (30 * 7));
+// Align to the nearest Sunday
+while (startDate.getDay() !== 0) {
+  startDate.setDate(startDate.getDate() - 1);
+}
+
+console.log("Painting KAIZO onto your GitHub matrix...");
+
+// Loop through columns and rows to create backdated commits
+for (let col = 0; col < matrix[0].length; col++) {
+  for (let row = 0; row < 7; row++) {
+    if (matrix[row][col] && matrix[row][col] !== ' ') {
+      const commitDate = new Date(startDate);
+      commitDate.setDate(startDate.getDate() + (col * 7) + row);
+      
+      // Prevent committing to future dates if the matrix spills over
+      if (commitDate > new Date()) continue;
+
+      const isoString = commitDate.toISOString();
+      
+      // Write a tiny change to a dummy file
+      fs.writeFileSync('art.txt', `${isoString}\n`, { flag: 'a' });
+      
+      // Force Git to log the commit at that exact moment in the past
+      execSync(`git add art.txt`);
+      execSync(`git commit -m "feat: pixel art grid" --date="${isoString}"`, {
+        env: {
+          ...process.env,
+          GIT_AUTHOR_DATE: isoString,
+          GIT_COMMITTER_DATE: isoString
+        }
+      });
+    }
+  }
+}
+
+console.log("Done structural building! Run 'git push' to upload the artwork.");
